@@ -24,7 +24,7 @@ bool isEven(int number) {
     return response;
 }
 
-int sumNumber(int number){
+int sumNumbers(int number){
     int sum;
     int split = 10;
     int nbrDigit = floor(log10(number) + 1);
@@ -52,6 +52,40 @@ bool isPrime(int number){
         ++divider;
     }
     return result;
+}
+
+int buffer(string bufferToIterate, char& smallestLowerLetter, char& biggestUpperLetter){
+    int counter             = 0;
+
+    smallestLowerLetter     = 'z'; //Any other lower letter will be smaller
+    biggestUpperLetter      = 'A'; //Any other upper letter will be bigger
+
+    for(unsigned int i = 0; i < bufferToIterate.size(); ++i){
+        //If it's not a letter then we skip
+        if(!isalpha(bufferToIterate[i])){
+            break;
+        }
+
+        //In case of lower letter
+        if(islower(bufferToIterate[i])){
+            //Check if current letter is smaller than the previous "smallest letter"
+            if(bufferToIterate[i] < smallestLowerLetter){
+                smallestLowerLetter = bufferToIterate[i];
+            }
+        }
+
+        //In case of upper letter
+        if(isupper(bufferToIterate[i])){
+            //Check if current letter is bigger than the previous "biggest letter"
+            if(bufferToIterate[i] > biggestUpperLetter){
+                biggestUpperLetter = bufferToIterate[i];
+            }
+        }
+
+        ++counter;
+    }
+
+    return counter;
 }
 
 void trigo(double deg, double& sinus, double& cosinus, double& tangent){
