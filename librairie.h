@@ -1,0 +1,8 @@
+//
+// Created by Maëlle on 05.11.2020.
+//
+
+#ifndef LABO4_LIBRAIRIE_LIBRAIRIE_H
+#define LABO4_LIBRAIRIE_LIBRAIRIE_H
+
+#endif //LABO4_LIBRAIRIE_LIBRAIRIE_H
