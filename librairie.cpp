@@ -59,3 +59,28 @@ void trigo(double deg, double& sinus, double& cosinus, double& tangent){
     cosinus    = cos(deg);
     tangent    = tan(deg);
 }
+
+bool answerYes(string question, const char YES, const char NO){
+    char userInput;
+
+    /*
+     *  GET USER INPUT
+     */
+    do{
+        cout << question;
+        cin >> userInput;
+
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    }while(!(tolower(userInput) == (char)tolower(YES)|| tolower(userInput) == (char)tolower(NO)));
+
+    /*
+     *  DETERMINE WHETHER TO RETURN TRUE OR FALSE
+     */
+     if((char)tolower(userInput) == (char)tolower(YES)){
+        return true;
+     }else{
+        return false;
+     }
+}
