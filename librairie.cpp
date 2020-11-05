@@ -45,8 +45,6 @@ bool isPrime(int number){
 
     //Check if number is divisible by another
     while(divider <= max){
-
-
         if(!(number%divider)){
             result = false;
             break;
@@ -54,4 +52,10 @@ bool isPrime(int number){
         ++divider;
     }
     return result;
+}
+
+void trigo(double deg, double* sinus, double* cosinus, double* tangent){
+    *sinus      = sin(deg);
+    *cosinus    = cos(deg);
+    *tangent    = tan(deg);
 }
