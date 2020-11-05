@@ -54,8 +54,8 @@ bool isPrime(int number){
     return result;
 }
 
-void trigo(double deg, double* sinus, double* cosinus, double* tangent){
-    *sinus      = sin(deg);
-    *cosinus    = cos(deg);
-    *tangent    = tan(deg);
+void trigo(double deg, double& sinus, double& cosinus, double& tangent){
+    sinus      = sin(deg);
+    cosinus    = cos(deg);
+    tangent    = tan(deg);
 }
