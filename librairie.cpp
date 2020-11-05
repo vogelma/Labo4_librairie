@@ -25,7 +25,7 @@ bool isEven(int number) {
 }
 
 int sumNumbers(int number){
-    int sum;
+    int sum = 0;
     int split = 10;
     int nbrDigit = floor(log10(number) + 1);
 
