@@ -54,6 +54,30 @@ bool isPrime(int number){
     return result;
 }
 
+bool nbreArmstrong(unsigned int number){
+    unsigned int    result          = 0;
+    int             tmp             = number;
+    int             currentDigit;
+
+    //For every digit in the number
+    while (tmp != 0) {
+        //Take the last digit of the number
+        currentDigit = tmp % 10;
+
+        //Add this number^3 to the result
+        result += pow(currentDigit, 3);
+
+        //Remove last digit
+        tmp = tmp / 10;
+    }
+
+    if (result == number)
+        return true;
+    else
+        return false;
+
+}
+
 int buffer(string bufferToIterate, char& smallestLowerLetter, char& biggestUpperLetter){
     int counter             = 0;
 
