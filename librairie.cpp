@@ -1,7 +1,7 @@
 /*-----------------------------------------------------------------------------------
 Filename      : librairie.cpp
 Authors       : Maëlle Vogel and Valentin Chételat
-Creation date : 05.11.2020
+Creation      : 05.11.2020
 Description   : <à compléter>
 Comments      : <à compléter>
 Compiler      : Mingw-w64 g++ 8.1.0
@@ -15,11 +15,6 @@ Compiler      : Mingw-w64 g++ 8.1.0
 #include <cassert>
 
 using namespace std;
-
-bool isEven(int number);
-int sumNumbers(int number);
-bool isPrime(unsigned int number);
-bool nbreArmstrong(unsigned int number);
 
 bool isEven(int number) {
     return (number % 2 == 0);
