@@ -6,30 +6,37 @@ Description   : <à compléter>
 Comments      : <à compléter>
 Compiler      : Mingw-w64 g++ 8.1.0
 -----------------------------------------------------------------------------------*/
-#include <cstdlib>
 #include <iostream>
+#include <string>
+#include <limits>
 #include <cmath>
-
-#include "librairie.h"
+#include <ctime>
+#include <cctype>
+#include <cassert>
 
 using namespace std;
 
+bool isEven(int number);
+int sumNumbers(int number);
+bool isPrime(unsigned int number);
+bool nbreArmstrong(unsigned int number);
+
+int main(){
+
+    return EXIT_SUCCESS;
+}
+
 bool isEven(int number) {
-    bool response = false;
-
-    if (!(number % 2)) {
-        response = true;
-    }
-
-    return response;
+    return (number % 2 == 0);
 }
 
 int sumNumbers(int number){
-    int sum = 0;
-    int split = 10;
-    int nbrDigit = floor(log10(number) + 1);
+    unsigned int            sum             = 0;
+    unsigned int            split           = 10;
+    const unsigned int      DIGITS_COUNT    = floor(log10(number) + 1);
 
-    for(int i = 1; i <= nbrDigit; ++i){
+    //Add each digit to the sum
+    for(int i = 1; i <= DIGITS_COUNT; ++i){
         sum += number%split;
         number = number/10;
     }
@@ -37,20 +44,24 @@ int sumNumbers(int number){
     return sum;
 }
 
-bool isPrime(int number){
+bool isPrime(unsigned int number){
     bool result = true;
-    int min = 2;
-    int divider = min;
-    double max = sqrt(number);
 
-    //Check if number is divisible by another
-    while(divider <= max){
-        if(!(number%divider)){
-            result = false;
-            break;
-        }
-        ++divider;
+    //0 and 1 aren't prime numbers
+    if (number == 0 || number == 1) {
+        return false;
     }
+    //For every other number
+    else {
+        //Check if divisible by another
+        for (int i = 2; i <= number / 2; ++i) {
+            if (number % i == 0) {
+                result = false;
+                break;
+            }
+        }
+    }
+
     return result;
 }
 
@@ -71,10 +82,7 @@ bool nbreArmstrong(unsigned int number){
         tmp = tmp / 10;
     }
 
-    if (result == number)
-        return true;
-    else
-        return false;
+    return (result == number);
 
 }
 
@@ -112,12 +120,6 @@ int buffer(string bufferToIterate, char& smallestLowerLetter, char& biggestUpper
     return counter;
 }
 
-int random(int minValue, int maxValue){
-    srand (time(0));
-
-    return rand() % maxValue + minValue;;
-}
-
 void trigo(double deg, double& sinus, double& cosinus, double& tangent){
     sinus      = sin(deg);
     cosinus    = cos(deg);
@@ -142,9 +144,12 @@ bool answerYes(string question, const char YES, const char NO){
     /*
      *  DETERMINE WHETHER TO RETURN TRUE OR FALSE
      */
-     if((char)tolower(userInput) == (char)tolower(YES)){
-        return true;
-     }else{
-        return false;
-     }
+    //Put both to lower and check the values
+    return (char)tolower(userInput) == (char)tolower(YES);
+}
+
+int random(int minValue, int maxValue){
+    srand (time(0));
+
+    return rand() % maxValue + minValue;;
 }
