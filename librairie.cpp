@@ -112,6 +112,12 @@ int buffer(string bufferToIterate, char& smallestLowerLetter, char& biggestUpper
     return counter;
 }
 
+int random(int minValue, int maxValue){
+    srand (time(0));
+
+    return rand() % maxValue + minValue;;
+}
+
 void trigo(double deg, double& sinus, double& cosinus, double& tangent){
     sinus      = sin(deg);
     cosinus    = cos(deg);
