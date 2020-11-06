@@ -21,11 +21,6 @@ int sumNumbers(int number);
 bool isPrime(unsigned int number);
 bool nbreArmstrong(unsigned int number);
 
-int main(){
-
-    return EXIT_SUCCESS;
-}
-
 bool isEven(int number) {
     return (number % 2 == 0);
 }
