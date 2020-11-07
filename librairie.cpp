@@ -1,7 +1,8 @@
+#include "librairie.h"
 /*-----------------------------------------------------------------------------------
 Filename      : librairie.cpp
 Authors       : Maëlle Vogel and Valentin Chételat
-Creation      : 05.11.2020
+Creation date : 05.11.2020
 Description   : <à compléter>
 Comments      : <à compléter>
 Compiler      : Mingw-w64 g++ 8.1.0
@@ -16,10 +17,24 @@ Compiler      : Mingw-w64 g++ 8.1.0
 
 using namespace std;
 
+/*
+ * Name         : isEven
+ * Description  : Check whether a number is even or odd
+ * Argument(s)  : int number : The number to test
+ * Return       : bool
+ *                true if the number is even
+ *                false if it's odd
+ */
 bool isEven(int number) {
     return (number % 2 == 0);
 }
 
+/*
+ * Name         : sumNumbers
+ * Description  : Sum all the digits of a given number and return the result
+ * Argument(s)  : int number : The number for which to add all the digits
+ * Return       : int : The result of the sum
+ */
 int sumNumbers(int number){
     unsigned int            sum             = 0;
     unsigned int            split           = 10;
@@ -34,6 +49,14 @@ int sumNumbers(int number){
     return sum;
 }
 
+/*
+ * Name         : isPrime
+ * Description  : Check whether a number is prime or not
+ * Argument(s)  : unsigned int number : The number to check
+ * Return       : bool
+ *                true is the number is prime
+ *                false if it's not
+ */
 bool isPrime(unsigned int number){
     bool result = true;
 
@@ -41,7 +64,7 @@ bool isPrime(unsigned int number){
     if (number == 0 || number == 1) {
         return false;
     }
-    //For every other number
+        //For every other number
     else {
         //Check if divisible by another
         for (int i = 2; i <= number / 2; ++i) {
@@ -55,6 +78,14 @@ bool isPrime(unsigned int number){
     return result;
 }
 
+/*
+ * Name         : nbreArmstrong
+ * Description  : Check whether a number is an Armstrong number or not
+ * Argument(s)  : unsigned int number : The number to check
+ * Return       : bool
+ *                true if the number is an Armstrong number
+ *                false if it's not
+ */
 bool nbreArmstrong(unsigned int number){
     unsigned int    result          = 0;
     int             tmp             = number;
@@ -76,6 +107,18 @@ bool nbreArmstrong(unsigned int number){
 
 }
 
+/*
+ * Name         : buffer
+ * Description  : Return the smallest lower letter and the biggest upper letter
+ *                found in the buffer.
+ * Argument(s)  : string bufferToIterate    : The buffer in which we should find the letters
+ *                char& smallestLowerLetter : Reference to the char variable where the
+ *                                            smallest lower letter will be stored
+ *                char& biggestUpperLetter  : Reference to the char variable where the
+ *                                            biggest upper letter will be stored
+ * Return       : int
+ *                The number of characters checked
+ */
 int buffer(string bufferToIterate, char& smallestLowerLetter, char& biggestUpperLetter){
     int counter             = 0;
 
@@ -110,12 +153,32 @@ int buffer(string bufferToIterate, char& smallestLowerLetter, char& biggestUpper
     return counter;
 }
 
-void trigo(double deg, double& sinus, double& cosinus, double& tangent){
+/*
+ * Name         : trigo
+ * Description  : For a given angle, calculate the sinus, cosinus and tangent
+ * Argument(s)  : const double deg  : Degree of the angle
+ *                double& sinus     : Reference to the double variable where sinus will be stored
+ *                double& cosinus   : Reference to the double variable where cosinus will be stored
+ *                double& tangent   : Reference to the double variable where tangent will be stored
+ * Return       : void
+ */
+void trigo(const double deg, double& sinus, double& cosinus, double& tangent){
     sinus      = sin(deg);
     cosinus    = cos(deg);
     tangent    = tan(deg);
 }
 
+/*
+ * Name         : answerYes
+ * Description  : Print a question and verify if the user answered by yes or no
+ *                The characters representing the yes/no are can be changed
+ * Argument(s)  : string question   : The question to ask
+ *                const char YES    : The character representing a "yes"
+ *                const char NO     : The character representing a "no"
+ * Return       : bool
+ *                true if the user answered by yes
+ *                false if the user answered by no
+ */
 bool answerYes(string question, const char YES, const char NO){
     char userInput;
 
@@ -138,7 +201,15 @@ bool answerYes(string question, const char YES, const char NO){
     return (char)tolower(userInput) == (char)tolower(YES);
 }
 
-int random(int minValue, int maxValue){
+/*
+ * Name         : random
+ * Description  : Return a random value in a range
+ * Argument(s)  : const int minValue    : minimum value included in the range
+ *                const int maxValue    : maximum value included in the range
+ * Return       : int
+ *                Random value in the range [minValue; maxValue]
+ */
+int random(const int minValue, const int maxValue){
     srand (time(0));
 
     return rand() % maxValue + minValue;;
