@@ -36,9 +36,9 @@ bool isEven(int number) {
  * Return       : int : The result of the sum
  */
 int sumNumbers(int number){
-    unsigned int            sum             = 0;
-    unsigned int            split           = 10;
-    const unsigned int      DIGITS_COUNT    = floor(log10(number) + 1);
+    int            sum             = 0;
+    int            split           = 10;
+    const int      DIGITS_COUNT    = (int)floor(log10(number) + 1);
 
     //Add each digit to the sum
     for(int i = 1; i <= DIGITS_COUNT; ++i){
@@ -67,7 +67,7 @@ bool isPrime(unsigned int number){
         //For every other number
     else {
         //Check if divisible by another
-        for (int i = 2; i <= number / 2; ++i) {
+        for (unsigned int i = 2; i <= number / 2; ++i) {
             if (number % i == 0) {
                 result = false;
                 break;
@@ -88,8 +88,8 @@ bool isPrime(unsigned int number){
  */
 bool nbreArmstrong(unsigned int number){
     unsigned int    result          = 0;
-    int             tmp             = number;
-    int             currentDigit;
+    unsigned int    tmp             = number;
+    unsigned int    currentDigit;
 
     //For every digit in the number
     while (tmp != 0) {
@@ -97,7 +97,7 @@ bool nbreArmstrong(unsigned int number){
         currentDigit = tmp % 10;
 
         //Add this number^3 to the result
-        result += pow(currentDigit, 3);
+        result += (unsigned int)pow(currentDigit, 3);
 
         //Remove last digit
         tmp = tmp / 10;
@@ -126,9 +126,11 @@ int buffer(string bufferToIterate, char& smallestLowerLetter, char& biggestUpper
     biggestUpperLetter      = '\0'; //Any other upper letter will be bigger
 
     for(unsigned int i = 0; i < bufferToIterate.size(); ++i){
+        ++counter;
+
         //If it's not a letter then we skip
         if(!isalpha(bufferToIterate[i])){
-            break;
+            continue;
         }
 
         //In case of lower letter
@@ -156,8 +158,6 @@ int buffer(string bufferToIterate, char& smallestLowerLetter, char& biggestUpper
                 biggestUpperLetter = bufferToIterate[i];
             }
         }
-        
-        ++counter;
     }
 
     return counter;
@@ -182,14 +182,14 @@ void trigo(const double deg, double& sinus, double& cosinus, double& tangent){
  * Name         : answerYes
  * Description  : Print a question and verify if the user answered by yes or no
  *                The characters representing the yes/no are can be changed
- * Argument(s)  : string question   : The question to ask
- *                const char YES    : The character representing a "yes"
- *                const char NO     : The character representing a "no"
+ * Argument(s)  : const string& question    : The question to ask
+ *                const char YES            : The character representing a "yes"
+ *                const char NO             : The character representing a "no"
  * Return       : bool
  *                true if the user answered by yes
  *                false if the user answered by no
  */
-bool answerYes(string question, const char YES, const char NO){
+bool answerYes(const string& question, const char YES, const char NO){
     char userInput;
 
     /*
@@ -220,7 +220,10 @@ bool answerYes(string question, const char YES, const char NO){
  *                Random value in the range [minValue; maxValue]
  */
 int random(const int minValue, const int maxValue){
-    srand (time(0));
-
-    return rand() % maxValue + minValue;;
+    static bool hasToInit = true;
+    if (hasToInit){
+        std::srand((unsigned)time(nullptr));
+        hasToInit = false;
+    }
+    return minValue + std::rand() % ((maxValue + 1 ) - minValue);
 }
