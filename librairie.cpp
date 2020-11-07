@@ -122,8 +122,8 @@ bool nbreArmstrong(unsigned int number){
 int buffer(string bufferToIterate, char& smallestLowerLetter, char& biggestUpperLetter){
     int counter             = 0;
 
-    smallestLowerLetter     = 'z'; //Any other lower letter will be smaller
-    biggestUpperLetter      = 'A'; //Any other upper letter will be bigger
+    smallestLowerLetter     = '\0'; //Any other lower letter will be smaller
+    biggestUpperLetter      = '\0'; //Any other upper letter will be bigger
 
     for(unsigned int i = 0; i < bufferToIterate.size(); ++i){
         //If it's not a letter then we skip
@@ -133,6 +133,11 @@ int buffer(string bufferToIterate, char& smallestLowerLetter, char& biggestUpper
 
         //In case of lower letter
         if(islower(bufferToIterate[i])){
+            //If it's the first lower letter
+            if(smallestLowerLetter == '\0'){
+                smallestLowerLetter = bufferToIterate[i];
+            }
+
             //Check if current letter is smaller than the previous "smallest letter"
             if(bufferToIterate[i] < smallestLowerLetter){
                 smallestLowerLetter = bufferToIterate[i];
@@ -141,12 +146,17 @@ int buffer(string bufferToIterate, char& smallestLowerLetter, char& biggestUpper
 
         //In case of upper letter
         if(isupper(bufferToIterate[i])){
+            //If it's the first upper letter
+            if(biggestUpperLetter == '\0'){
+                biggestUpperLetter = bufferToIterate[i];
+            }
+
             //Check if current letter is bigger than the previous "biggest letter"
             if(bufferToIterate[i] > biggestUpperLetter){
                 biggestUpperLetter = bufferToIterate[i];
             }
         }
-
+        
         ++counter;
     }
 
