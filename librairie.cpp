@@ -63,7 +63,7 @@ bool isPrime(unsigned int number){
     if (number == 0 || number == 1) {
         return false;
     }
-    //For every other number
+        //For every other number
     else {
         //Check if divisible by another
         for (unsigned int i = 2; i <= number / 2; ++i) {
@@ -77,14 +77,14 @@ bool isPrime(unsigned int number){
 }
 
 /*
- * Name         : nbreArmstrong
+ * Name         : nbArmstrong
  * Description  : Check whether a number is an Armstrong number or not
  * Argument(s)  : unsigned int number : The number to check
  * Return       : bool
  *                true if the number is an Armstrong number
  *                false if it's not
  */
-bool nbreArmstrong(unsigned int number){
+bool nbArmstrong(unsigned int number){
     unsigned int    result          = 0;
     unsigned int    tmp             = number;
     unsigned int    currentDigit;
@@ -118,41 +118,42 @@ bool nbreArmstrong(unsigned int number){
  *                The number of characters checked
  */
 int buffer(string& bufferToIterate, char& smallestLowerLetter, char& biggestUpperLetter){
-    int counter;
+    int counter = 0;
 
     smallestLowerLetter     = '\0';
     biggestUpperLetter      = '\0';
 
-    for(counter = 0; counter < bufferToIterate.size(); ++counter){
+    for(int i = 0; i < bufferToIterate.size(); ++i){
+        ++counter;
 
         //If it's not a letter then we skip
-        if(!isalpha(bufferToIterate[counter])){
+        if(!isalpha(bufferToIterate[i])){
             continue;
         }
 
         //In case of lower letter
-        if(islower(bufferToIterate[counter])){
+        if(islower(bufferToIterate[i])){
             //If it's the first lower letter
             if(smallestLowerLetter == '\0'){
-                smallestLowerLetter = bufferToIterate[counter];
+                smallestLowerLetter = bufferToIterate[i];
             }
 
             //Check if current letter is smaller than the previous "smallest letter"
-            if(bufferToIterate[counter] < smallestLowerLetter){
-                smallestLowerLetter = bufferToIterate[counter];
+            if(bufferToIterate[i] < smallestLowerLetter){
+                smallestLowerLetter = bufferToIterate[i];
             }
         }
 
         //In case of upper letter
-        if(isupper(bufferToIterate[counter])){
+        if(isupper(bufferToIterate[i])){
             //If it's the first upper letter
             if(biggestUpperLetter == '\0'){
-                biggestUpperLetter = bufferToIterate[counter];
+                biggestUpperLetter = bufferToIterate[i];
             }
 
             //Check if current letter is bigger than the previous "biggest letter"
-            if(bufferToIterate[counter] > biggestUpperLetter){
-                biggestUpperLetter = bufferToIterate[counter];
+            if(bufferToIterate[i] > biggestUpperLetter){
+                biggestUpperLetter = bufferToIterate[i];
             }
         }
     }
@@ -162,16 +163,16 @@ int buffer(string& bufferToIterate, char& smallestLowerLetter, char& biggestUppe
 
 /*
  * Name         : trigo
- * Description  : For a given angle, calculate the sinus, cosinus and tangent
+ * Description  : For a given angle, calculate the sine, cosine and tangent
  * Argument(s)  : const double deg  : Degree of the angle
- *                double& sinus     : Reference to the double variable where sinus will be stored
- *                double& cosinus   : Reference to the double variable where cosinus will be stored
+ *                double& sine     : Reference to the double variable where sine will be stored
+ *                double& cosine   : Reference to the double variable where cosine will be stored
  *                double& tangent   : Reference to the double variable where tangent will be stored
  * Return       : void
  */
-void trigo(const double deg, double& sinus, double& cosinus, double& tangent){
-    sinus      = sin(deg * (M_PI / 180));
-    cosinus    = cos(deg * (M_PI / 180));
+void trigo(const double deg, double& sine, double& cosine, double& tangent){
+    sine      = sin(deg * (M_PI / 180));
+    cosine    = cos(deg * (M_PI / 180));
     tangent    = tan(deg * (M_PI / 180));
 }
 
@@ -193,7 +194,7 @@ bool answerYes(const string question, const char YES, const char NO){
      *  GET USER INPUT
      */
     do{
-        cout << question;
+        cout << question << "[" << YES << "/" << NO << "] :";
         cin >> userInput;
 
         cin.clear();
