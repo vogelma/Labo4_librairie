@@ -21,13 +21,13 @@ using namespace std;
 /*
  * Name         : isEven
  * Description  : Check whether a number is even or odd
- * Argument(s)  : unsigned int number : The number to test
+ * Argument(s)  : const unsigned int NUMBER : The number to test
  * Return       : bool
  *                true if the number is even
  *                false if it's odd
  */
-bool isEven(unsigned int number) {
-    return (number % 2 == 0);
+bool isEven(const unsigned int NUMBER) {
+    return (NUMBER % 2 == 0);
 }
 
 /*
@@ -53,21 +53,21 @@ int sumDigits(unsigned int number){
 /*
  * Name         : isPrime
  * Description  : Check whether a number is prime or not
- * Argument(s)  : unsigned int number : The number to check
+ * Argument(s)  : const unsigned int NUMBER : The number to check
  * Return       : bool
  *                true is the number is prime
  *                false if it's not
  */
-bool isPrime(unsigned int number){
+bool isPrime(const unsigned int NUMBER){
     //0 and 1 aren't prime numbers
-    if (number == 0 || number == 1) {
+    if (NUMBER == 0 || NUMBER == 1) {
         return false;
     }
         //For every other number
     else {
         //Check if divisible by another
-        for (unsigned int i = 2; i <= number / 2; ++i) {
-            if (number % i == 0) {
+        for (unsigned int i = 2; i <= NUMBER / 2; ++i) {
+            if (NUMBER % i == 0) {
                 return false;
             }
         }
@@ -79,14 +79,14 @@ bool isPrime(unsigned int number){
 /*
  * Name         : nbArmstrong
  * Description  : Check whether a number is an Armstrong number or not
- * Argument(s)  : unsigned int number : The number to check
+ * Argument(s)  : const unsigned int NUMBER : The number to check
  * Return       : bool
  *                true if the number is an Armstrong number
  *                false if it's not
  */
-bool nbArmstrong(unsigned int number){
+bool nbArmstrong(const unsigned int NUMBER){
     unsigned int    result          = 0;
-    unsigned int    tmp             = number;
+    unsigned int    tmp             = NUMBER;
     unsigned int    currentDigit;
 
     //For every digit in the number
@@ -101,19 +101,18 @@ bool nbArmstrong(unsigned int number){
         tmp = tmp / 10;
     }
 
-    return (result == number);
-
+    return (result == NUMBER);
 }
 
 /*
  * Name         : buffer
  * Description  : Return the smallest lower letter and the biggest upper letter
  *                found in the buffer.
- * Argument(s)  : string bufferToIterate    : The buffer in which we should find the letters
- *                char& smallestLowerLetter : Reference to the char variable where the
- *                                            smallest lower letter will be stored
- *                char& biggestUpperLetter  : Reference to the char variable where the
- *                                            biggest upper letter will be stored
+ * Argument(s)  : string& bufferToIterate    : Ref. to The buffer in which we should find the letters
+ *                char& smallestLowerLetter  : Reference to the char variable where the
+ *                                             smallest lower letter will be stored
+ *                char& biggestUpperLetter   : Reference to the char variable where the
+ *                                             biggest upper letter will be stored
  * Return       : int
  *                The number of characters checked
  */
@@ -164,37 +163,37 @@ int buffer(string& bufferToIterate, char& smallestLowerLetter, char& biggestUppe
 /*
  * Name         : trigo
  * Description  : For a given angle, calculate the sine, cosine and tangent
- * Argument(s)  : const double deg  : Degree of the angle
- *                double& sine     : Reference to the double variable where sine will be stored
- *                double& cosine   : Reference to the double variable where cosine will be stored
- *                double& tangent   : Reference to the double variable where tangent will be stored
+ * Argument(s)  : const double ANGLE    : Angle in degree
+ *                double& sine          : Reference to the double variable where sine will be stored
+ *                double& cosine        : Reference to the double variable where cosine will be stored
+ *                double& tangent       : Reference to the double variable where tangent will be stored
  * Return       : void
  */
-void trigo(const double deg, double& sine, double& cosine, double& tangent){
-    sine      = sin(deg * (M_PI / 180));
-    cosine    = cos(deg * (M_PI / 180));
-    tangent    = tan(deg * (M_PI / 180));
+void trigo(const double ANGLE, double& sine, double& cosine, double& tangent){
+    sine      = sin(ANGLE * (M_PI / 180));
+    cosine    = cos(ANGLE * (M_PI / 180));
+    tangent   = tan(ANGLE * (M_PI / 180));
 }
 
 /*
  * Name         : answerYes
  * Description  : Print a question and verify if the user answered by yes or no
  *                The characters representing the yes/no are can be changed
- * Argument(s)  : const string& question    : The question to ask
+ * Argument(s)  : const string& QUESTION    : The question to ask
  *                const char YES            : The character representing a "yes"
  *                const char NO             : The character representing a "no"
  * Return       : bool
  *                true if the user answered by yes
  *                false if the user answered by no
  */
-bool answerYes(const string question, const char YES, const char NO){
+bool answerYes(const string QUESTION, const char YES, const char NO){
     char userInput;
 
     /*
      *  GET USER INPUT
      */
     do{
-        cout << question << "[" << YES << "/" << NO << "] :";
+        cout << QUESTION << "[" << YES << "/" << NO << "] :";
         cin >> userInput;
 
         cin.clear();
@@ -212,16 +211,16 @@ bool answerYes(const string question, const char YES, const char NO){
 /*
  * Name         : random
  * Description  : Return a random value in a range
- * Argument(s)  : const int minValue    : minimum value included in the range
- *                const int maxValue    : maximum value included in the range
+ * Argument(s)  : const int MINIMUM    : minimum value included in the range
+ *                const int MAXIMUM    : maximum value included in the range
  * Return       : int
- *                Random value in the range [minValue; maxValue]
+ *                Random value in the range [MINIMUM; MAXIMUM]
  */
-int random(const int minValue, const int maxValue){
+int random(const int MINIMUM, const int MAXIMUM){
     static bool hasToInit = true;
     if (hasToInit){
         std::srand((unsigned)time(nullptr));
         hasToInit = false;
     }
-    return std::rand() % maxValue  + minValue;
+    return std::rand() % MAXIMUM + MINIMUM;
 }
