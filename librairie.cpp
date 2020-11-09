@@ -1,4 +1,3 @@
-#include "librairie.h"
 /*-----------------------------------------------------------------------------------
 Filename      : librairie.cpp
 Authors       : Maëlle Vogel and Valentin Chételat
@@ -15,27 +14,29 @@ Compiler      : Mingw-w64 g++ 8.1.0
 #include <cctype>
 #include <cassert>
 
+#include "librairie.h"
+
 using namespace std;
 
 /*
  * Name         : isEven
  * Description  : Check whether a number is even or odd
- * Argument(s)  : int number : The number to test
+ * Argument(s)  : unsigned int number : The number to test
  * Return       : bool
  *                true if the number is even
  *                false if it's odd
  */
-bool isEven(int number) {
+bool isEven(unsigned int number) {
     return (number % 2 == 0);
 }
 
 /*
  * Name         : sumNumbers
  * Description  : Sum all the digits of a given number and return the result
- * Argument(s)  : int number : The number for which to add all the digits
+ * Argument(s)  : unsigned int number : The number for which to add all the digits
  * Return       : int : The result of the sum
  */
-int sumNumbers(int number){
+int sumNumbers(unsigned int number){
     int            sum             = 0;
     int            split           = 10;
     const int      DIGITS_COUNT    = (int)floor(log10(number) + 1);
@@ -58,24 +59,21 @@ int sumNumbers(int number){
  *                false if it's not
  */
 bool isPrime(unsigned int number){
-    bool result = true;
-
     //0 and 1 aren't prime numbers
     if (number == 0 || number == 1) {
         return false;
     }
-        //For every other number
+    //For every other number
     else {
         //Check if divisible by another
         for (unsigned int i = 2; i <= number / 2; ++i) {
             if (number % i == 0) {
-                result = false;
-                break;
+                return false;
             }
         }
     }
 
-    return result;
+    return true;
 }
 
 /*
