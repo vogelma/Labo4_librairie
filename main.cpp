@@ -294,13 +294,13 @@ void displayMenu(){
     /*
      * DISPLAY THE MENU
      */
-    cout << "\nOptions" << endl
-         << "1   Is even" << endl
-         << "2   Sum digits" << endl
-         << "3   Prime number" << endl
-         << "4   Armstrong's number" << endl
-         << "5   Random" << endl
-         << "6   Buffer" << endl
-         << "7   Trigo" << endl
-         << "0   Quit" << endl;
+    cout << "\nOptions"                 << endl
+         << "1   Is even"               << endl
+         << "2   Sum digits"            << endl
+         << "3   Prime number"          << endl
+         << "4   Armstrong's number"    << endl
+         << "5   Random"                << endl
+         << "6   Buffer"                << endl
+         << "7   Trigo"                 << endl
+         << "0   Quit"                  << endl;
 }
