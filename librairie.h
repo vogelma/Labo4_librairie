@@ -1,22 +1,23 @@
-/*-----------------------------------------------------------------------------------
-Filename      : librairie.h
-Authors       : Maëlle Vogel and Valentin Chételat
-Creation date : 05.11.2020
-Description   : <à compléter>
-Comments      : <à compléter>
-Compiler      : Mingw-w64 g++ 8.1.0
------------------------------------------------------------------------------------*/
+#ifndef LABO_04_LIBRAIRIE_LIBRAIRIE_H
+#define LABO_04_LIBRAIRIE_LIBRAIRIE_H
 
-#ifndef LABO4_LIBRAIRIE_LIBRAIRIE_H
-#define LABO4_LIBRAIRIE_LIBRAIRIE_H
+#include <string>
 
-bool isEven(int number);
-int sumNumbers(int number);
-bool isPrime(unsigned int number);
-bool nbreArmstrong(unsigned int number);
-int buffer(string bufferToIterate, char& smallestLowerLetter, char& biggestUpperLetter);
-void trigo(double deg, double& sinus, double& cosinus, double& tangent);
-bool answerYes(string question, const char YES, const char NO);
-int random(int minValue, int maxValue);
+bool    isEven              (unsigned int number);
+int     sumNumbers          (unsigned int number);
+bool    isPrime             (unsigned int number);
+bool    nbreArmstrong       (unsigned int number);
+int     buffer              (std::string bufferToIterate,
+                             char& smallestLowerLetter,
+                             char& biggestUpperLetter);
+void    trigo               (const double deg,
+                             double& sinus,
+                             double& cosinus,
+                             double& tangent);
+bool    answerYes           (const std::string& question,
+                             const char YES,
+                             const char NO);
+int     random              (const int minValue,
+                             const int maxValue);
 
-#endif //LABO4_LIBRAIRIE_LIBRAIRIE_H
+#endif //LABO_04_LIBRAIRIE_LIBRAIRIE_H
