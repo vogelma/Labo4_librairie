@@ -4,17 +4,17 @@
 #include <string>
 
 bool    isEven              (unsigned int number);
-int     sumNumbers          (unsigned int number);
+int     sumDigits           (unsigned int number);
 bool    isPrime             (unsigned int number);
 bool    nbreArmstrong       (unsigned int number);
-int     buffer              (std::string bufferToIterate,
+int     buffer              (std::string& bufferToIterate,
                              char& smallestLowerLetter,
                              char& biggestUpperLetter);
 void    trigo               (const double deg,
                              double& sinus,
                              double& cosinus,
                              double& tangent);
-bool    answerYes           (const std::string& question,
+bool    answerYes           (const std::string question,
                              const char YES,
                              const char NO);
 int     random              (const int minValue,

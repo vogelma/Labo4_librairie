@@ -31,12 +31,12 @@ bool isEven(unsigned int number) {
 }
 
 /*
- * Name         : sumNumbers
+ * Name         : sumDigits
  * Description  : Sum all the digits of a given number and return the result
  * Argument(s)  : unsigned int number : The number for which to add all the digits
  * Return       : int : The result of the sum
  */
-int sumNumbers(unsigned int number){
+int sumDigits(unsigned int number){
     int            sum             = 0;
     int            split           = 10;
     const int      DIGITS_COUNT    = (int)floor(log10(number) + 1);
@@ -117,43 +117,42 @@ bool nbreArmstrong(unsigned int number){
  * Return       : int
  *                The number of characters checked
  */
-int buffer(string bufferToIterate, char& smallestLowerLetter, char& biggestUpperLetter){
-    int counter             = 0;
+int buffer(string& bufferToIterate, char& smallestLowerLetter, char& biggestUpperLetter){
+    int counter;
 
-    smallestLowerLetter     = '\0'; //Any other lower letter will be smaller
-    biggestUpperLetter      = '\0'; //Any other upper letter will be bigger
+    smallestLowerLetter     = '\0';
+    biggestUpperLetter      = '\0';
 
-    for(unsigned int i = 0; i < bufferToIterate.size(); ++i){
-        ++counter;
+    for(counter = 0; counter < bufferToIterate.size(); ++counter){
 
         //If it's not a letter then we skip
-        if(!isalpha(bufferToIterate[i])){
+        if(!isalpha(bufferToIterate[counter])){
             continue;
         }
 
         //In case of lower letter
-        if(islower(bufferToIterate[i])){
+        if(islower(bufferToIterate[counter])){
             //If it's the first lower letter
             if(smallestLowerLetter == '\0'){
-                smallestLowerLetter = bufferToIterate[i];
+                smallestLowerLetter = bufferToIterate[counter];
             }
 
             //Check if current letter is smaller than the previous "smallest letter"
-            if(bufferToIterate[i] < smallestLowerLetter){
-                smallestLowerLetter = bufferToIterate[i];
+            if(bufferToIterate[counter] < smallestLowerLetter){
+                smallestLowerLetter = bufferToIterate[counter];
             }
         }
 
         //In case of upper letter
-        if(isupper(bufferToIterate[i])){
+        if(isupper(bufferToIterate[counter])){
             //If it's the first upper letter
             if(biggestUpperLetter == '\0'){
-                biggestUpperLetter = bufferToIterate[i];
+                biggestUpperLetter = bufferToIterate[counter];
             }
 
             //Check if current letter is bigger than the previous "biggest letter"
-            if(bufferToIterate[i] > biggestUpperLetter){
-                biggestUpperLetter = bufferToIterate[i];
+            if(bufferToIterate[counter] > biggestUpperLetter){
+                biggestUpperLetter = bufferToIterate[counter];
             }
         }
     }
@@ -171,9 +170,9 @@ int buffer(string bufferToIterate, char& smallestLowerLetter, char& biggestUpper
  * Return       : void
  */
 void trigo(const double deg, double& sinus, double& cosinus, double& tangent){
-    sinus      = sin(deg);
-    cosinus    = cos(deg);
-    tangent    = tan(deg);
+    sinus      = sin(deg * (M_PI / 180));
+    cosinus    = cos(deg * (M_PI / 180));
+    tangent    = tan(deg * (M_PI / 180));
 }
 
 /*
@@ -187,7 +186,7 @@ void trigo(const double deg, double& sinus, double& cosinus, double& tangent){
  *                true if the user answered by yes
  *                false if the user answered by no
  */
-bool answerYes(const string& question, const char YES, const char NO){
+bool answerYes(const string question, const char YES, const char NO){
     char userInput;
 
     /*
@@ -223,5 +222,5 @@ int random(const int minValue, const int maxValue){
         std::srand((unsigned)time(nullptr));
         hasToInit = false;
     }
-    return minValue + std::rand() % ((maxValue + 1 ) - minValue);
+    return std::rand() % maxValue  + minValue;
 }
