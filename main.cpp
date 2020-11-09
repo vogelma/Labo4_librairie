@@ -23,3 +23,41 @@ int main() {
     EMPTY_BUFFER
     return EXIT_SUCCESS;
 }
+
+unsigned int askUserForInput_uint(string question, unsigned int min, unsigned int max){
+    unsigned int userInput;
+
+    /*
+     *  GET USER INPUT
+     */
+    do{
+        if(cin.fail()){
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        cout << question << "[" << min << "-" << max << "] :";
+        cin >> userInput;
+
+    }while(userInput < min || userInput > max || cin.fail());
+
+    return userInput;
+}
+
+unsigned int askUserForInput_double(string question, unsigned int min, unsigned int max){
+    double userInput;
+
+    /*
+     *  GET USER INPUT
+     */
+    do{
+        if(cin.fail()){
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+        cout << question << "[" << min << "-" << max << "] :";
+        cin >> userInput;
+
+    }while(userInput < min || userInput > max || cin.fail());
+
+    return userInput;
+}
