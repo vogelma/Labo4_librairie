@@ -1,8 +1,9 @@
 /*-----------------------------------------------------------------------------------
-Filename      : librairie.cpp
+Filename      : main.cpp
 Authors       : Maëlle Vogel and Valentin Chételat
 Creation date : 05.11.2020
-Description   : <à compléter>
+Description   : The programme will display a menu with multiple options. Each option has
+                its own action. This action is described in the librairie.h file.
 Comments      : <à compléter>
 Compiler      : Mingw-w64 g++ 8.1.0
 -----------------------------------------------------------------------------------*/
@@ -164,6 +165,35 @@ void optionNbArmstrong() {
 
 }
 
+void optionRandom(){
+    int min;
+    int max;
+    int nbreTime;
+    int nbreRnd;
+
+    /*
+     * USER INPUT
+     */
+    min = askUserForInput_int("- Start: ", -100, 100);
+    max = askUserForInput_int("- End  : ", min, 100);
+    nbreTime = askUserForInput_int("- nbre : ", 0, 100);
+
+    cout << "this are the random value [" << min << " - " << max << "]:" << endl;
+
+    for(int i = 1; i <= nbreTime; ++i){
+        nbreRnd = random(min, max);
+
+        cout << nbreRnd;
+
+        if(i != nbreTime){
+            cout << ", ";
+        }
+
+    }
+    cout << endl;
+
+}
+
 void optionBuffer() {
     char    smallestLowerLetter;
     char    biggestUpperLetter;
@@ -218,11 +248,6 @@ void optionTrigo() {
          << "tan(" << angle << ") = " << tangent << endl;
 }
 
-void optionRandom(){
-    for(int i = 0; i < 10; ++i){
-        cout << random(0, 50) << endl;
-    }
-}
 
 /*-------------------------------------------------------------------------------
  * INPUT FUNCTIONS
@@ -235,7 +260,7 @@ int askUserForInput_int(string question, int min, int max) {
      */
     do {
 
-        cout << question << "[" << min << "-" << max << "] :";
+        cout << question << "[" << min << " - " << max << "] :";
         cin >> userInput;
 
         if (cin.fail()) {
@@ -257,7 +282,7 @@ unsigned int askUserForInput_uint(string question, unsigned int min, unsigned in
      *  GET USER INPUT
      */
     do {
-        cout << question << "[" << min << "-" << max << "] :";
+        cout << question << "[" << min << " - " << max << "] :";
         cin >> userInput;
 
         if (cin.fail()) {
@@ -280,7 +305,7 @@ double askUserForInput_double(string question, double min, double max) {
      */
     do {
 
-        cout << question << "[" << min << "-" << max << "] :";
+        cout << question << "[" << min << " - " << max << "] :";
         cin >> userInput;
 
         if (cin.fail()) {
