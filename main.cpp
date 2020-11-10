@@ -234,6 +234,7 @@ int askUserForInput_int(string question, int min, int max) {
      *  GET USER INPUT
      */
     do {
+        repeat = false;
 
         cout << question << "[" << min << "-" << max << "] :";
         cin >> userInput;
@@ -246,6 +247,7 @@ int askUserForInput_int(string question, int min, int max) {
                 cin.clear();
         }
 
+        cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     } while (repeat);
@@ -261,6 +263,7 @@ double askUserForInput_double(string question, double min, double max) {
      *  GET USER INPUT
      */
     do {
+        repeat = false;
 
         cout << question << "[" << min << "-" << max << "] :";
         cin >> userInput;
