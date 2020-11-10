@@ -26,7 +26,7 @@ bool isNegative(int value);
 /*-------------------------------------------------------------------------------
  * LIBRARY FUNCTIONS
  -------------------------------------------------------------------------------*/
-bool    isEven          (const int NUMBER) {
+bool isEven(const int NUMBER) {
     //In case the value is negative we take the absolute value
     if(isNegative(NUMBER))
         return ((abs(NUMBER) % 2) == 0);
@@ -34,7 +34,7 @@ bool    isEven          (const int NUMBER) {
         return (NUMBER % 2 == 0);
 }
 
-int     sumDigits       (int number){
+int sumDigits(int number){
     int            sum             = 0;
     int            split           = 10;
     const int      DIGITS_COUNT    = (int)floor(log10(number) + 1);
@@ -52,7 +52,7 @@ int     sumDigits       (int number){
     return sum;
 }
 
-bool    isPrime         (int number){
+bool isPrime(int number){
     //In case the value is negative we take the absolute value
     if(isNegative(number))
         number = abs(number);
@@ -74,7 +74,7 @@ bool    isPrime         (int number){
     return true;
 }
 
-bool    nbArmstrong     (int number){
+bool nbArmstrong(int number){
     int    result          = 0;
     int    tmp             = (number < 0) ? abs(number) : number; //If <0 then take absolute value
     int    currentDigit;
@@ -94,7 +94,7 @@ bool    nbArmstrong     (int number){
     return (result == number);
 }
 
-int     buffer          (string& bufferToIterate, char& smallestLowerLetter, char& biggestUpperLetter){
+int buffer(string& bufferToIterate, char& smallestLowerLetter, char& biggestUpperLetter){
     int counter = 0;
 
     smallestLowerLetter     = '\0';
@@ -138,13 +138,13 @@ int     buffer          (string& bufferToIterate, char& smallestLowerLetter, cha
     return counter;
 }
 
-void    trigo           (const double ANGLE, double& sine, double& cosine, double& tangent){
+void trigo(const double ANGLE, double& sine, double& cosine, double& tangent){
     sine      = sin(ANGLE * (M_PI / 180));
     cosine    = cos(ANGLE * (M_PI / 180));
     tangent   = tan(ANGLE * (M_PI / 180));
 }
 
-bool    answerYes       (const string QUESTION, const char YES, const char NO){
+bool answerYes(const string QUESTION, const char YES, const char NO){
     char userInput;
 
     /*
@@ -166,7 +166,7 @@ bool    answerYes       (const string QUESTION, const char YES, const char NO){
     return (char)tolower(userInput) == (char)tolower(YES);
 }
 
-int     random          (const int MINIMUM, const int MAXIMUM){
+int random(const int MINIMUM, const int MAXIMUM){
     static bool hasToInit = true;
 
     if (hasToInit){
