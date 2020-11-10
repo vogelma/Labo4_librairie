@@ -218,8 +218,9 @@ bool answerYes(const string QUESTION, const char YES, const char NO){
  */
 int random(const int MINIMUM, const int MAXIMUM){
     static bool hasToInit = true;
+
     if (hasToInit){
-        std::srand((unsigned)time(nullptr));
+        srand((unsigned)time(nullptr));
         hasToInit = false;
     }
     return std::rand() % MAXIMUM + MINIMUM;
