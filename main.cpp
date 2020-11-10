@@ -1,9 +1,8 @@
 /*-----------------------------------------------------------------------------------
-Filename      : main.cpp
+Filename      : librairie.cpp
 Authors       : Maëlle Vogel and Valentin Chételat
 Creation date : 05.11.2020
-Description   : The programme will display a menu with multiple options. Each option has
-                its own action. This action is described in the librairie.h file.
+Description   : <à compléter>
 Comments      : <à compléter>
 Compiler      : Mingw-w64 g++ 8.1.0
 -----------------------------------------------------------------------------------*/
@@ -25,7 +24,6 @@ void            optionNbArmstrong();
 void            optionBuffer();
 void            optionTrigo();
 void            optionRandom();
-unsigned int    askUserForInput_uint(string question, unsigned int min, unsigned int max);
 int             askUserForInput_int(string question, int min, int max);
 double          askUserForInput_double(string question, double min, double max);
 void            displayMenu();
@@ -86,12 +84,12 @@ int main() {
  * FEATURES
  -------------------------------------------------------------------------------*/
 void optionIsEven() {
-    unsigned int number;
+    int number;
 
     /*
      * USER INPUT
      */
-    number = askUserForInput_uint("Enter a value ", 0, 1000);
+    number = askUserForInput_int("Enter a value ", 0, 1000);
 
     /*
      * PRINT WHETHER IT'S PRIME OR NOT
@@ -105,13 +103,13 @@ void optionIsEven() {
 }
 
 void optionSumDigits() {
-    unsigned int    number;
+    int             number;
     int             result;
 
     /*
      * USER INPUT
      */
-    number = askUserForInput_uint("Enter a value ", 0, 1000);
+    number = askUserForInput_int("Enter a value ", 0, 1000);
 
     /*
      * DO THE OPERATION
@@ -125,19 +123,19 @@ void optionSumDigits() {
 }
 
 void optionIsPrime() {
-    unsigned int min;
-    unsigned int max;
+    int min;
+    int max;
 
     /*
      * USER INPUT
      */
-    min = askUserForInput_uint("- Start: ", 0, 1000);
-    max = askUserForInput_uint("- End  : ", min, 1000);
+    min = askUserForInput_int("- Start: ", 0, 1000);
+    max = askUserForInput_int("- End  : ", min, 1000);
 
     /*
      * PRINT PRIME NUMBERS
      */
-    for (unsigned int i = min; i <= max; ++i) {
+    for (int i = min; i <= max; ++i) {
         if (isPrime(i)) {
             cout << "The number " << i << " is prime" << endl;
         }
@@ -145,52 +143,23 @@ void optionIsPrime() {
 }
 
 void optionNbArmstrong() {
-    unsigned int min;
-    unsigned int max;
+    int min;
+    int max;
 
     /*
      * USER INPUT
      */
-    min = askUserForInput_uint("- Start: ", 0, 1000);
-    max = askUserForInput_uint("- End  : ", min, 1000);
+    min = askUserForInput_int("- Start: ", 0, 1000);
+    max = askUserForInput_int("- End  : ", min, 1000);
 
     /*
      * PRINT ARMSTRONG NUMBERS
      */
-    for (unsigned int i = min; i <= max; ++i) {
+    for (int i = min; i <= max; ++i) {
         if (nbArmstrong(i)) {
             cout << "The number " << i << " is an Armstrong number" << endl;
         }
     }
-
-}
-
-void optionRandom(){
-    int min;
-    int max;
-    int nbreTime;
-    int nbreRnd;
-
-    /*
-     * USER INPUT
-     */
-    min = askUserForInput_int("- Start: ", -100, 100);
-    max = askUserForInput_int("- End  : ", min, 100);
-    nbreTime = askUserForInput_int("- nbre : ", 0, 100);
-
-    cout << "this are the random value [" << min << " - " << max << "]:" << endl;
-
-    for(int i = 1; i <= nbreTime; ++i){
-        nbreRnd = random(min, max);
-
-        cout << nbreRnd;
-
-        if(i != nbreTime){
-            cout << ", ";
-        }
-
-    }
-    cout << endl;
 
 }
 
@@ -248,73 +217,65 @@ void optionTrigo() {
          << "tan(" << angle << ") = " << tangent << endl;
 }
 
+void optionRandom(){
+    for(int i = 0; i < 10; ++i){
+        cout << random(0, 50) << endl;
+    }
+}
 
 /*-------------------------------------------------------------------------------
  * INPUT FUNCTIONS
  -------------------------------------------------------------------------------*/
 int askUserForInput_int(string question, int min, int max) {
-    int userInput;
+    bool    repeat      = false;
+    int     userInput;
 
     /*
      *  GET USER INPUT
      */
     do {
 
-        cout << question << "[" << min << " - " << max << "] :";
+        cout << question << "[" << min << "-" << max << "] :";
         cin >> userInput;
 
-        if (cin.fail()) {
-            cin.clear();
+        if (cin.fail() || userInput < min || userInput > max) {
             cout << "Input error" << endl;
+            repeat = true;
+
+            if(cin.fail())
+                cin.clear();
         }
 
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    } while (userInput < min || userInput > max);
-
-    return userInput;
-}
-
-unsigned int askUserForInput_uint(string question, unsigned int min, unsigned int max) {
-    unsigned int userInput;
-
-    /*
-     *  GET USER INPUT
-     */
-    do {
-        cout << question << "[" << min << " - " << max << "] :";
-        cin >> userInput;
-
-        if (cin.fail()) {
-            cin.clear();
-            cout << "Input error" << endl;
-        }
-
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-    } while (userInput < min || userInput > max);
+    } while (repeat);
 
     return userInput;
 }
 
 double askUserForInput_double(string question, double min, double max) {
-    double userInput;
+    bool    repeat      = false;
+    double  userInput;
 
     /*
      *  GET USER INPUT
      */
     do {
 
-        cout << question << "[" << min << " - " << max << "] :";
+        cout << question << "[" << min << "-" << max << "] :";
         cin >> userInput;
 
-        if (cin.fail()) {
-            cin.clear();
+        if (cin.fail() || userInput < min || userInput > max) {
             cout << "Input error" << endl;
+            repeat = true;
+
+            if(cin.fail())
+                cin.clear();
         }
+
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    } while (userInput < min || userInput > max);
+    } while (repeat);
 
     return userInput;
 }
