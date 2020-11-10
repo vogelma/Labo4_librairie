@@ -23,6 +23,7 @@ void            optionIsPrime();
 void            optionNbArmstrong();
 void            optionBuffer();
 void            optionTrigo();
+void            optionRandom();
 unsigned int    askUserForInput_uint(string question, unsigned int min, unsigned int max);
 int             askUserForInput_int(string question, int min, int max);
 double          askUserForInput_double(string question, double min, double max);
@@ -63,7 +64,7 @@ int main() {
                 optionNbArmstrong();
                 break;
             case 5:
-
+                optionRandom();
                 break;
             case 6:
                 optionBuffer();
@@ -215,6 +216,12 @@ void optionTrigo() {
          << "sin(" << angle << ") = " << sine << endl
          << "cos(" << angle << ") = " << cosine << endl
          << "tan(" << angle << ") = " << tangent << endl;
+}
+
+void optionRandom(){
+    for(int i = 0; i < 10; ++i){
+        cout << random(0, 50) << endl;
+    }
 }
 
 /*-------------------------------------------------------------------------------
