@@ -7,12 +7,8 @@ Comments      : <à compléter>
 Compiler      : Mingw-w64 g++ 8.1.0
 -----------------------------------------------------------------------------------*/
 #include <iostream>
-#include <string>
 #include <limits>
-#include <cmath>
-#include <ctime>
-#include <cctype>
-#include <cassert>
+#include <iomanip>
 
 #include "librairie.h"
 
@@ -21,164 +17,306 @@ using namespace std;
 /*-------------------------------------------------------------------------------
  * PROTOTYPES
  -------------------------------------------------------------------------------*/
-bool isNegative(int value);
+void            optionIsEven();
+void            optionSumDigits();
+void            optionIsPrime();
+void            optionNbArmstrong();
+void            optionBuffer();
+void            optionTrigo();
+void            optionRandom();
+int             askUserForInput_int(string question, int min, int max);
+double          askUserForInput_double(string question, double min, double max);
+void            displayMenu();
+
+int main() {
+    bool    repeat          = true;
+    int     menuChoice;
+
+    do {
+        /*
+         * DISPLAY MENU
+         */
+        displayMenu();
+
+        /*
+         * USER INPUT
+         */
+        menuChoice = askUserForInput_int("\nYour choice ", 0, 7);
+
+        /*
+         * FEATURES
+         */
+        switch (menuChoice) {
+            case 0:
+                repeat = !answerYes("Would you like to quit ", 'y', 'n');
+                break;
+            case 1:
+                optionIsEven();
+                break;
+            case 2:
+                optionSumDigits();
+                break;
+            case 3:
+                optionIsPrime();
+                break;
+            case 4:
+                optionNbArmstrong();
+                break;
+            case 5:
+                optionRandom();
+                break;
+            case 6:
+                optionBuffer();
+                break;
+            case 7:
+                optionTrigo();
+                break;
+            default:
+                break;
+        }
+
+    } while (repeat);
+
+    return EXIT_SUCCESS;
+}
 
 /*-------------------------------------------------------------------------------
- * LIBRARY FUNCTIONS
+ * FEATURES
  -------------------------------------------------------------------------------*/
-bool isEven(const int NUMBER) {
-    //In case the value is negative we take the absolute value
-    if(isNegative(NUMBER))
-        return ((abs(NUMBER) % 2) == 0);
-    else
-        return (NUMBER % 2 == 0);
+void optionIsEven() {
+    int number;
+
+    /*
+     * USER INPUT
+     */
+    number = askUserForInput_int("Enter a value ", 0, 1000);
+
+    /*
+     * PRINT WHETHER IT'S PRIME OR NOT
+     */
+    cout << number;
+    if (isEven(number)) {
+        cout << " is even" << endl;
+    } else {
+        cout << " is not even" << endl;
+    }
 }
 
-int sumDigits(int number){
-    int            sum             = 0;
-    int            split           = 10;
-    const int      DIGITS_COUNT    = (int)floor(log10(number) + 1);
+void optionSumDigits() {
+    int             number;
+    int             result;
 
-    //In case the value is negative we take the absolute value
-    if(isNegative(number))
-        number = abs(number);
+    /*
+     * USER INPUT
+     */
+    number = askUserForInput_int("Enter a value ", 0, 1000);
 
-    //Add each digit to the sum
-    for(int i = 1; i <= DIGITS_COUNT; ++i){
-        sum += number%split;
-        number = number/10;
-    }
+    /*
+     * DO THE OPERATION
+     */
+    result = sumDigits(number);
 
-    return sum;
+    /*
+     * PRINT THE RESULT
+     */
+    cout << "The sum of all digits in " << number << " = " << result << endl;
 }
 
-bool isPrime(int number){
-    //In case the value is negative we take the absolute value
-    if(isNegative(number))
-        number = abs(number);
+void optionIsPrime() {
+    int min;
+    int max;
 
-    //0 and 1 aren't prime numbers
-    if (number == 0 || number == 1) {
-        return false;
+    /*
+     * USER INPUT
+     */
+    min = askUserForInput_int("- Start: ", 0, 1000);
+    max = askUserForInput_int("- End  : ", min, 1000);
+
+    /*
+     * PRINT PRIME NUMBERS
+     */
+    for (int i = min; i <= max; ++i) {
+        if (isPrime(i)) {
+            cout << "The number " << i << " is prime" << endl;
+        }
     }
-        //For every other number
-    else {
-        //Check if divisible by another
-        for (unsigned int i = 2; i <= number / 2; ++i) {
-            if (number % i == 0) {
-                return false;
-            }
+}
+
+void optionNbArmstrong() {
+    int min;
+    int max;
+
+    /*
+     * USER INPUT
+     */
+    min = askUserForInput_int("- Start: ", 0, 1000);
+    max = askUserForInput_int("- End  : ", min, 1000);
+
+    /*
+     * PRINT ARMSTRONG NUMBERS
+     */
+    for (int i = min; i <= max; ++i) {
+        if (nbArmstrong(i)) {
+            cout << "The number " << i << " is an Armstrong number" << endl;
         }
     }
 
-    return true;
 }
 
-bool nbArmstrong(int number){
-    int    result          = 0;
-    int    tmp             = (number < 0) ? abs(number) : number; //If <0 then take absolute value
-    int    currentDigit;
+void optionBuffer() {
+    char    smallestLowerLetter;
+    char    biggestUpperLetter;
+    string  sentence;
 
-    //For every digit in the number
-    while (tmp != 0) {
-        //Take the last digit of the number
-        currentDigit = tmp % 10;
+    /*
+     * GET SENTENCE FROM USER
+     */
+    cout << "Enter a sentence:";
+    getline(cin, sentence);
 
-        //Add this number^3 to the result
-        result += (int)pow(currentDigit, 3);
+    /*
+     * DO THE OPERATION
+     */
+    int nbChar = buffer(sentence, smallestLowerLetter, biggestUpperLetter);
 
-        //Remove last digit
-        tmp = tmp / 10;
+    /*
+     * PRINT THE RESULT
+     */
+    if (smallestLowerLetter != '\0') {
+        cout << "The smallest lower letter: " << smallestLowerLetter << endl;
+    }
+    if (biggestUpperLetter != '\0') {
+        cout << "The biggest upper letter: " << biggestUpperLetter << endl;
     }
 
-    return (result == number);
+    cout << "Number of characters: " << nbChar << endl;
 }
 
-int buffer(string& bufferToIterate, char& smallestLowerLetter, char& biggestUpperLetter){
-    int counter = 0;
+void optionTrigo() {
+    double angle;
+    double sine;
+    double cosine;
+    double tangent;
 
-    smallestLowerLetter     = '\0';
-    biggestUpperLetter      = '\0';
+    /*
+     * USER INPUT
+     */
+    angle = askUserForInput_double("Enter an angle in degree ", 0 , 360);
 
-    for(int i = 0; i < bufferToIterate.size(); ++i){
-        ++counter;
+    /*
+     * DO THE OPERATION
+     */
+    trigo(angle, sine, cosine, tangent);
 
-        //If it's not a letter then we skip
-        if(!isalpha(bufferToIterate[i])){
-            continue;
-        }
+    /*
+     * PRINT THE RESULT
+     */
+    cout << setprecision(6)
+         << "sin(" << angle << ") = " << sine << endl
+         << "cos(" << angle << ") = " << cosine << endl
+         << "tan(" << angle << ") = " << tangent << endl;
+}
 
-        //In case of lower letter
-        if(islower(bufferToIterate[i])){
-            //If it's the first lower letter
-            if(smallestLowerLetter == '\0'){
-                smallestLowerLetter = bufferToIterate[i];
-            }
+void optionRandom(){
+    int randomMinValue;
+    int randomMaxValue;
+    int nbRandomValues;
+    int randomValue;
 
-            //Check if current letter is smaller than the previous "smallest letter"
-            if(bufferToIterate[i] < smallestLowerLetter){
-                smallestLowerLetter = bufferToIterate[i];
-            }
-        }
+    /*
+     * USER INPUT
+     */
+    randomMinValue = askUserForInput_int("- Start     : ", -100, 100);
+    randomMaxValue = askUserForInput_int("- End       : ", randomMinValue, 100);
+    nbRandomValues = askUserForInput_int("- Nb of val : ", 0, 100);
 
-        //In case of upper letter
-        if(isupper(bufferToIterate[i])){
-            //If it's the first upper letter
-            if(biggestUpperLetter == '\0'){
-                biggestUpperLetter = bufferToIterate[i];
-            }
+    cout << "Here are the random values in [" << randomMinValue << " - " << randomMaxValue << "]:" << endl;
 
-            //Check if current letter is bigger than the previous "biggest letter"
-            if(bufferToIterate[i] > biggestUpperLetter){
-                biggestUpperLetter = bufferToIterate[i];
-            }
-        }
+    /*
+     * PRINT RANDOM NUMBERS
+     */
+    for(int i = 1; i <= nbRandomValues; ++i){
+        randomValue = random(randomMinValue, randomMaxValue);
+        cout << randomValue;
+
+        if(i != nbRandomValues)
+            cout << ", ";
     }
-
-    return counter;
+    cout << endl;
 }
 
-void trigo(const double ANGLE, double& sine, double& cosine, double& tangent){
-    sine      = sin(ANGLE * (M_PI / 180));
-    cosine    = cos(ANGLE * (M_PI / 180));
-    tangent   = tan(ANGLE * (M_PI / 180));
-}
-
-bool answerYes(const string QUESTION, const char YES, const char NO){
-    char userInput;
+/*-------------------------------------------------------------------------------
+ * INPUT FUNCTIONS
+ -------------------------------------------------------------------------------*/
+int askUserForInput_int(string question, int min, int max) {
+    bool    repeat      = false;
+    int     userInput;
 
     /*
      *  GET USER INPUT
      */
-    do{
-        cout << QUESTION << "[" << YES << "/" << NO << "] :";
+    do {
+        repeat = false;
+
+        cout << question << "[" << min << "-" << max << "] :";
         cin >> userInput;
 
-        cin.clear();
+        if (cin.fail() || userInput < min || userInput > max) {
+            cout << "Input error" << endl;
+            repeat = true;
+
+            if(cin.fail())
+                cin.clear();
+        }
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    }while(!(tolower(userInput) == (char)tolower(YES)|| tolower(userInput) == (char)tolower(NO)));
+    } while (repeat);
 
-    /*
-     *  DETERMINE WHETHER TO RETURN TRUE OR FALSE
-     */
-    //Put both to lower and check the values
-    return (char)tolower(userInput) == (char)tolower(YES);
+    return userInput;
 }
 
-int random(const int MINIMUM, const int MAXIMUM){
-    static bool hasToInit = true;
+double askUserForInput_double(string question, double min, double max) {
+    bool    repeat      = false;
+    double  userInput;
 
-    if (hasToInit){
-        srand((unsigned)time(nullptr));
-        hasToInit = false;
-    }
-    return std::rand() % MAXIMUM + MINIMUM;
+    /*
+     *  GET USER INPUT
+     */
+    do {
+        repeat = false;
+
+        cout << question << "[" << min << "-" << max << "] :";
+        cin >> userInput;
+
+        if (cin.fail() || userInput < min || userInput > max) {
+            cout << "Input error" << endl;
+            repeat = true;
+
+            if(cin.fail())
+                cin.clear();
+        }
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    } while (repeat);
+
+    return userInput;
 }
 
 /*-------------------------------------------------------------------------------
- * INTERNAL FUNCTIONS
+ * DISPLAY FUNCTIONS
  -------------------------------------------------------------------------------*/
-bool isNegative(int value){
-    return (value < 0);
+void displayMenu(){
+    /*
+     * DISPLAY THE MENU
+     */
+    cout << "\nOptions"                 << endl
+         << "1   Is even"               << endl
+         << "2   Sum digits"            << endl
+         << "3   Prime number"          << endl
+         << "4   Armstrong's number"    << endl
+         << "5   Random"                << endl
+         << "6   Buffer"                << endl
+         << "7   Trigo"                 << endl
+         << "0   Quit"                  << endl;
 }
