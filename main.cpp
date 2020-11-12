@@ -218,9 +218,31 @@ void optionTrigo() {
 }
 
 void optionRandom(){
-    for(int i = 0; i < 10; ++i){
-        cout << random(0, 50) << endl;
+    int randomMinValue;
+    int randomMaxValue;
+    int nbRandomValues;
+    int randomValue;
+
+    /*
+     * USER INPUT
+     */
+    randomMinValue = askUserForInput_int("- Start     : ", -100, 100);
+    randomMaxValue = askUserForInput_int("- End       : ", randomMinValue, 100);
+    nbRandomValues = askUserForInput_int("- Nb of val : ", 0, 100);
+
+    cout << "Here are the random values in [" << randomMinValue << " - " << randomMaxValue << "]:" << endl;
+
+    /*
+     * PRINT RANDOM NUMBERS
+     */
+    for(int i = 1; i <= nbRandomValues; ++i){
+        randomValue = random(randomMinValue, randomMaxValue);
+        cout << randomValue;
+
+        if(i != nbRandomValues)
+            cout << ", ";
     }
+    cout << endl;
 }
 
 /*-------------------------------------------------------------------------------
@@ -246,8 +268,6 @@ int askUserForInput_int(string question, int min, int max) {
             if(cin.fail())
                 cin.clear();
         }
-
-        cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     } while (repeat);
