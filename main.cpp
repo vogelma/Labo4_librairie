@@ -1,9 +1,19 @@
 /*-----------------------------------------------------------------------------------
-Filename      : librairie.cpp
+Filename      : main.cpp
 Authors       : Maëlle Vogel and Valentin Chételat
 Creation date : 05.11.2020
-Description   : <à compléter>
-Comments      : <à compléter>
+Description   : The programme will display a menu with multiple options. Each option has
+                its own action. This action is described in the librairie.h file.
+                The user is asked to choose between:
+                    1 show if a number is even
+                    2 show the sum of the digits of a number
+                    3 show the prime numbers in a range
+                    4 show the Armstrong numbers in a range
+                    5 look for the smallest lower and biggest upper letters in the string
+                    6 show the cosine, sine and tangent of an angle
+                    7 generate random numbers in a range
+                    8 quit the program
+Comments      :
 Compiler      : Mingw-w64 g++ 8.1.0
 -----------------------------------------------------------------------------------*/
 #include <iostream>
@@ -218,16 +228,38 @@ void optionTrigo() {
 }
 
 void optionRandom(){
-    for(int i = 0; i < 10; ++i){
-        cout << random(0, 50) << endl;
+    int min;
+    int max;
+    int nbreTime;
+    int nbreRnd;
+
+    /*
+     * USER INPUT
+     */
+    min = askUserForInput_int("- Start: ", -100, 100);
+    max = askUserForInput_int("- End  : ", min, 100);
+    nbreTime = askUserForInput_int("- nbre : ", 0, 100);
+
+    cout << "this are the random value [" << min << " - " << max << "]:" << endl;
+
+    for(int i = 1; i <= nbreTime; ++i){
+        nbreRnd = random(min, max);
+
+        cout << nbreRnd;
+
+        if(i != nbreTime){
+            cout << ", ";
+        }
+
     }
+    cout << endl;
 }
 
 /*-------------------------------------------------------------------------------
  * INPUT FUNCTIONS
  -------------------------------------------------------------------------------*/
 int askUserForInput_int(string question, int min, int max) {
-    bool    repeat      = false;
+    bool    repeat;
     int     userInput;
 
     /*
@@ -236,8 +268,9 @@ int askUserForInput_int(string question, int min, int max) {
     do {
         repeat = false;
 
-        cout << question << "[" << min << "-" << max << "] :";
+        cout << question << "[" << min << " - " << max << "] :";
         cin >> userInput;
+
 
         if (cin.fail() || userInput < min || userInput > max) {
             cout << "Input error" << endl;
@@ -247,7 +280,6 @@ int askUserForInput_int(string question, int min, int max) {
                 cin.clear();
         }
 
-        cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     } while (repeat);
@@ -256,7 +288,7 @@ int askUserForInput_int(string question, int min, int max) {
 }
 
 double askUserForInput_double(string question, double min, double max) {
-    bool    repeat      = false;
+    bool    repeat;
     double  userInput;
 
     /*
@@ -265,7 +297,7 @@ double askUserForInput_double(string question, double min, double max) {
     do {
         repeat = false;
 
-        cout << question << "[" << min << "-" << max << "] :";
+        cout << question << "[" << min << " - " << max << "] :";
         cin >> userInput;
 
         if (cin.fail() || userInput < min || userInput > max) {

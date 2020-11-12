@@ -2,8 +2,16 @@
 Filename      : librairie.cpp
 Authors       : Maëlle Vogel and Valentin Chételat
 Creation date : 05.11.2020
-Description   : <à compléter>
-Comments      : <à compléter>
+Description   : This library provides functions to :
+                - Check is a number is even/odd
+                - Sum each digits of a number
+                - Check if a number is prime
+                - Check if a number is an Armstrong number
+                - Look for the smallest lower and the biggest upper letters in a string
+                - Get the sine, consine and tangent of and angle
+                - Get a random number within a range
+
+                More informations about the functions can be found in "librairie.h".
 Compiler      : Mingw-w64 g++ 8.1.0
 -----------------------------------------------------------------------------------*/
 #include <iostream>
