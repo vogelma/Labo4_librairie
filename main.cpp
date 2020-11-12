@@ -228,38 +228,37 @@ void optionTrigo() {
 }
 
 void optionRandom(){
-    int min;
-    int max;
-    int nbreTime;
-    int nbreRnd;
+    int randomMinValue;
+    int randomMaxValue;
+    int nbRandomValues;
+    int randomValue;
 
     /*
      * USER INPUT
      */
-    min = askUserForInput_int("- Start: ", -100, 100);
-    max = askUserForInput_int("- End  : ", min, 100);
-    nbreTime = askUserForInput_int("- nbre : ", 0, 100);
+    randomMinValue = askUserForInput_int("- Start     : ", -100, 100);
+    randomMaxValue = askUserForInput_int("- End       : ", randomMinValue, 100);
+    nbRandomValues = askUserForInput_int("- Nb of val : ", 0, 100);
 
-    cout << "this are the random value [" << min << " - " << max << "]:" << endl;
+    cout << "Here are the random values in [" << randomMinValue << " - " << randomMaxValue << "]:" << endl;
 
-    for(int i = 1; i <= nbreTime; ++i){
-        nbreRnd = random(min, max);
+    /*
+     * PRINT RANDOM NUMBERS
+     */
+    for(int i = 1; i <= nbRandomValues; ++i){
+        randomValue = random(randomMinValue, randomMaxValue);
+        cout << randomValue;
 
-        cout << nbreRnd;
-
-        if(i != nbreTime){
+        if(i != nbRandomValues)
             cout << ", ";
-        }
-
     }
-    cout << endl;
 }
 
 /*-------------------------------------------------------------------------------
  * INPUT FUNCTIONS
  -------------------------------------------------------------------------------*/
 int askUserForInput_int(string question, int min, int max) {
-    bool    repeat;
+    bool    repeat      = false;
     int     userInput;
 
     /*
@@ -268,9 +267,8 @@ int askUserForInput_int(string question, int min, int max) {
     do {
         repeat = false;
 
-        cout << question << "[" << min << " - " << max << "] :";
+        cout << question << "[" << min << "-" << max << "] :";
         cin >> userInput;
-
 
         if (cin.fail() || userInput < min || userInput > max) {
             cout << "Input error" << endl;
@@ -280,6 +278,7 @@ int askUserForInput_int(string question, int min, int max) {
                 cin.clear();
         }
 
+        cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     } while (repeat);
@@ -288,7 +287,7 @@ int askUserForInput_int(string question, int min, int max) {
 }
 
 double askUserForInput_double(string question, double min, double max) {
-    bool    repeat;
+    bool    repeat      = false;
     double  userInput;
 
     /*
@@ -297,7 +296,7 @@ double askUserForInput_double(string question, double min, double max) {
     do {
         repeat = false;
 
-        cout << question << "[" << min << " - " << max << "] :";
+        cout << question << "[" << min << "-" << max << "] :";
         cin >> userInput;
 
         if (cin.fail() || userInput < min || userInput > max) {
